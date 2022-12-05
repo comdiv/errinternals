@@ -43,4 +43,4 @@ typedef struct Bonus
 
 void init_Bonus(int ticketCount, Bonus* target);
 // now returns error code
-Err calculate_Bonus(Bonus* target);
+VoidResult calculate_Bonus(Bonus* target);

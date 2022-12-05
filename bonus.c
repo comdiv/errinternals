@@ -19,35 +19,41 @@ void init_Bonus(int ticketCount, Bonus *target)
 
 
 
-IntOrErr __calculate_per_men(Bonus* target);
-IntOrErr __calculate_per_female(Bonus* target);
-Err __calculate_by_baseStrategy(Bonus *target);
+IntResult __calculate_per_men(Bonus* target);
+IntResult __calculate_per_female(Bonus* target);
+VoidResult __calculate_by_baseStrategy(Bonus *target);
 
 // public impls
 
-Err calculate_Bonus(Bonus* target) {
-    Err result = NO_ERROR;
+VoidResult calculate_Bonus(Bonus* target) {
     // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
-    // ANSWER: shugar with conditional behavior and error accumulation
+    // RUST LIKE - мы не просто копим ошибки, мы еще можем и структурировано досрочный выход с пропагацией сделать
+    /**
+     * Это аналог растовского
+     * fn calculate_Bonus(&mut target: Bonus) -> Result<(),Error> {
+     *      __calculate_by_baseStrategy(target)?; // знак вопроса в конце означает, 
+     *              //что если тут ошибка прерваться и выдать уже ошибку завернутую в результат
+     *      ...
+     * }
+    */
     /* many calls before ...*/
-    result |= __calculate_by_baseStrategy(target);
+    unwrapOrError(__calculate_by_baseStrategy(target));
     /* many calls after ...*/
-    return result;
+    return NO_ERROR_RESULT;
 }
 
 
 // private impls
 
-Err __calculate_by_baseStrategy(Bonus *target) {
+VoidResult __calculate_by_baseStrategy(Bonus *target) {
     // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
-    // ANSWER: shugar with conditional behavior and error accumulation
-    Err err = NO_ERROR;
-    APPLY_INT_OR_ERR(err, target->ticketPerMen,  __calculate_per_men(target));
-    APPLY_INT_OR_ERR(err, target->ticketPerFemale,  __calculate_per_female(target));
-    return err;
+    // RUST LIKE - мы не просто копим ошибки, мы еще можем и структурировано досрочный выход с пропагацией сделать
+    unwrapValueOrError(target->ticketPerMen, __calculate_per_men(target) )
+    unwrapValueOrError(target->ticketPerFemale, __calculate_per_female(target) )
+    return NO_ERROR_RESULT;
 }
 
-IntOrErr __calculate_per_men(Bonus* target) {
+IntResult __calculate_per_men(Bonus* target) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
     // ANSWER - functional-like style Either
     return INT_OR_ERR(
@@ -58,7 +64,7 @@ IntOrErr __calculate_per_men(Bonus* target) {
     );
 }
 
-IntOrErr __calculate_per_female(Bonus* target) {
+IntResult __calculate_per_female(Bonus* target) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
     // ANSWER - functional-like style Either
     return INT_OR_ERR(

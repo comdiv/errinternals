@@ -27,12 +27,17 @@ int main()
     printf("Ok, perform compilation...\n");
      
     // PROBLEM (1): catch errors inside calculate bonus HERE
-    // ANSWER: API should return err we can ignore but can use
-    Err err = calculate_Bonus(&bonus);
-    if (err != NO_ERROR) {
-        printf("Error! Read manual. Error code: %d\n", err);
-        exit(err);
+    // ANSWER: сделано целое семейство API для обертывания ошибок и принятия на этой основе решений
+    // и есть понятие как обработки какой-то ошибок, так и явной паники
+    unwrapOrPanic(calculate_Bonus(&bonus));
+
+    /* строка выше, тоже самое что и
+    VoidResult result = calculate_Bonus(&bonus);
+    if (isError(result)){
+        panic(result);
     }
+    */
+
 
     
     printf("All well, %d per male, %d per female", bonus.ticketPerMen, bonus.ticketPerFemale);
