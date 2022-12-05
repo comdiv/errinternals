@@ -1,5 +1,6 @@
 #include "bonus.h"
 #include "hack.h"
+#include <stdio.h>
 
 void init_Bonus(int ticketCount, Bonus *target)
 {
@@ -54,12 +55,12 @@ int __calculate_per_men(Bonus *target)
 {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
     // ANSWER - WE SET GLOBAL ERROR FLAG AND RETURN SOME KNOWN INVALID VALUE
-    return ZCHECKED(ZDIV(target->menQuote, target->actualMenCount));
+    return ZDIV(target->menQuote, target->actualMenCount);
 }
 
 int __calculate_per_female(Bonus *target)
 {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
     // ANSWER - WE SET GLOBAL ERROR FLAG AND RETURN SOME KNOWN INVALID VALUE
-    return ZCHECKED(ZDIV(target->femaleQuote, target->actualFemaleCount));
+    return ZDIV(target->femaleQuote, target->actualFemaleCount);
 }
