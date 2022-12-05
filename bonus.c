@@ -1,5 +1,6 @@
 #include "bonus.h"
 #include "hack.h"
+#include <stdio.h>
 
 void init_Bonus(int ticketCount, Bonus *target)
 {
@@ -25,7 +26,6 @@ void __calculate_by_baseStrategy(Bonus *target, int* err);
 // public impls
 
 void calculate_Bonus(Bonus* target, int* err) {
-
     // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
 
     /* many calls before ...*/
@@ -44,11 +44,11 @@ void __calculate_by_baseStrategy(Bonus *target, int* err) {
 
 int __calculate_per_men(Bonus* target, int* err) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
-    return ZCHECKED(ZDIV(target->menQuote, target->actualMenCount));
+    return ZDIV(target->menQuote, target->actualMenCount);
 }
 
 int __calculate_per_female(Bonus* target, int* err) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
-    return ZCHECKED(ZDIV(target->femaleQuote, target->actualFemaleCount));
+    return ZDIV(target->femaleQuote, target->actualFemaleCount);
 }
 

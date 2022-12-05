@@ -37,6 +37,8 @@ typedef struct Bonus
 // мужчины не наш профиль, на них много не закладываем
 #define FIXED_MEN_RATE 0.2
 #define BONUS_UNKNOWN -1
+#define ERR_ARITH_ERROR 2
 
 void init_Bonus(int ticketCount, Bonus* target);
+
 void calculate_Bonus(Bonus* target, int* err); 
