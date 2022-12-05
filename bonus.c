@@ -26,7 +26,7 @@ void __calculate_by_baseStrategy(Bonus *target);
 void calculate_Bonus(Bonus* target) {
 
     // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
-
+    // ответ простой - делать не придется НИЧЕГО
     /* many calls before ...*/
     __calculate_by_baseStrategy(target);
     /* many calls after ...*/
@@ -37,17 +37,20 @@ void calculate_Bonus(Bonus* target) {
 
 void __calculate_by_baseStrategy(Bonus *target) {
     // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
+    // ответ простой - делать не придется НИЧЕГО
     target->ticketPerMen = __calculate_per_men(target);
     target->ticketPerFemale = __calculate_per_female(target);
 }
 
 int __calculate_per_men(Bonus* target) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
+    // тут конечно все равно придется как-то детектить проблемы и заменять ИСКЛЮЧЕНИЯМИ
     return target->menQuote / target->actualMenCount;
 }
 
 int __calculate_per_female(Bonus* target) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
+    // тут конечно все равно придется как-то детектить проблемы и заменять ИСКЛЮЧЕНИЯМИ
     return target->femaleQuote / target->actualFemaleCount;
 }
 
