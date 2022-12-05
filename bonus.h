@@ -39,4 +39,4 @@ typedef struct Bonus
 #define BONUS_UNKNOWN -1
 
 void init_Bonus(int ticketCount, Bonus* target);
-void calculate_Bonus(Bonus* target);
+void calculate_Bonus(Bonus* target, int* err); 
