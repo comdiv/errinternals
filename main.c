@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include "bonus.h"
-#include "errno.h"
 
 int readInt(const char* prompt);
 
@@ -24,13 +23,16 @@ int main()
     bonus.actualMenCount = readInt("Enter actual men count: ");
     bonus.actualFemaleCount = readInt("Enter actual femail count: ");
     printf("Ok, perform compilation...\n");
+
+    ERR_OUT_VARIABLE = 0;
+
     calculate_Bonus(&bonus);
 
     // PROBLEM (1): catch errors inside calculate bonus HERE
     // ANSWER : WE CHECK GLOBAL ERROR FLAG IN PLACE WHERE WE CAN DECIDE WHAT TO DO
-    if (errno != 0) {
-        fprintf(stderr, "Error! see manual, err code: %d\n", errno);
-        exit(errno);
+    if (ERR_OUT_VARIABLE != 0) {
+        fprintf(stderr, "Error! see manual, err code: %d\n", ERR_OUT_VARIABLE);
+        exit(ERR_OUT_VARIABLE);
     }
     
 

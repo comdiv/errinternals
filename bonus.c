@@ -16,11 +16,14 @@ void init_Bonus(int ticketCount, Bonus *target)
     *target = tmp;
 }
 
+
+
 // private defs
 
 int __calculate_per_men(Bonus *target);
 int __calculate_per_female(Bonus *target);
 void __calculate_by_baseStrategy(Bonus *target);
+
 
 // public impls
 
@@ -35,6 +38,9 @@ void calculate_Bonus(Bonus *target)
 }
 
 // private impls
+
+int __bonusErrNo = 0;
+int* ___bonusErrNo() { return &__bonusErrNo; }
 
 void __calculate_by_baseStrategy(Bonus *target)
 {

@@ -1,4 +1,6 @@
 #pragma once
+#ifndef BONUS_HEADER
+#define BONUS_HEADER
 
 /// структура некоей промо программы по раздаче на мероприатии флаеров, билетов с рекламой
 typedef struct Bonus
@@ -42,3 +44,12 @@ typedef struct Bonus
 
 void init_Bonus(int ticketCount, Bonus* target);
 void calculate_Bonus(Bonus* target);
+
+// не хотим использовать штатный errno
+
+int* ___bonusErrNo();
+
+
+#define ERR_OUT_VARIABLE  (*___bonusErrNo())
+
+#endif
