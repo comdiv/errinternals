@@ -27,7 +27,7 @@ void __calculate_by_baseStrategy(Bonus *target, int* err);
 
 void calculate_Bonus(Bonus* target, int* err) {
     // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
-
+    // ANSWER: just keep simple sygnature with resending pointer to optional error 
     /* many calls before ...*/
     __calculate_by_baseStrategy(target, err);
     /* many calls after ...*/
@@ -38,17 +38,20 @@ void calculate_Bonus(Bonus* target, int* err) {
 
 void __calculate_by_baseStrategy(Bonus *target, int* err) {
     // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
+    // ANSWER: just keep simple sygnature with resending pointer to optional error 
     target->ticketPerMen = __calculate_per_men(target, err);
     target->ticketPerFemale = __calculate_per_female(target, err);
 }
 
 int __calculate_per_men(Bonus* target, int* err) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
+    // ANSWER - IF required - we will send err along with result
     return ZDIV(target->menQuote, target->actualMenCount);
 }
 
 int __calculate_per_female(Bonus* target, int* err) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
+    // ANSWER - IF required - we will send err along with result
     return ZDIV(target->femaleQuote, target->actualFemaleCount);
 }
 
