@@ -30,7 +30,7 @@ int main()
     int err = 0;
     calculate_Bonus(&bonus, &err);
     if (err) {
-        fprintf(stderr, "Error! Read manual, code: %d", err);
+        fprintf(stderr, "Error! Read manual, code: %d\n", err);
     }
     /**
      * calculate_Bonus(&bonus, NULL); // это игнор ошибки

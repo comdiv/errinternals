@@ -1,6 +1,5 @@
 #include "bonus.h"
 #include "hack.h"
-#include <stdio.h>
 
 void init_Bonus(int ticketCount, Bonus *target)
 {
