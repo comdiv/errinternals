@@ -1,3 +1,4 @@
+.PHONY: build
 build:
 	clang -o errorint.exe ./*.c -lreadline
 
