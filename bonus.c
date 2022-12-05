@@ -1,5 +1,5 @@
 #include "bonus.h"
-#include <errno.h>
+#include "hack.h"
 
 void init_Bonus(int ticketCount, Bonus *target)
 {
@@ -48,22 +48,12 @@ int __calculate_per_men(Bonus *target)
 {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
     // ANSWER - WE SET GLOBAL ERROR FLAG AND RETURN SOME KNOWN INVALID VALUE
-    if (target->actualFemaleCount == 0)
-    {
-        errno = ERR_ARITH_ERROR;
-        return BONUS_UNKNOWN;
-    }
-    return target->menQuote / target->actualMenCount;
+    return ZCHECKED(ZDIV(target->menQuote, target->actualMenCount));
 }
 
 int __calculate_per_female(Bonus *target)
 {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
     // ANSWER - WE SET GLOBAL ERROR FLAG AND RETURN SOME KNOWN INVALID VALUE
-    if (target->actualFemaleCount == 0)
-    {
-        errno = ERR_ARITH_ERROR;
-        return BONUS_UNKNOWN;
-    }
-    return target->femaleQuote / target->actualFemaleCount;
+    return ZCHECKED(ZDIV(target->femaleQuote, target->actualFemaleCount));
 }
