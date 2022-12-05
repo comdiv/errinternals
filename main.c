@@ -25,6 +25,9 @@ int main()
     bonus.actualFemaleCount = readInt("Enter actual femail count: ");
     printf("Ok, perform compilation...\n");
     calculate_Bonus(&bonus);
+
+    // PROBLEM (1): catch errors inside calculate bonus HERE
+
     printf("All well, %d per male, %d per female", bonus.ticketPerMen, bonus.ticketPerFemale);
     return 0;
 }
