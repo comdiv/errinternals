@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include "bonus.h"
+#include "errno.h"
 
 int readInt(const char* prompt);
 
@@ -25,6 +26,12 @@ int main()
     bonus.actualFemaleCount = readInt("Enter actual femail count: ");
     printf("Ok, perform compilation...\n");
     calculate_Bonus(&bonus);
+
+    if (errno != 0) {
+        fprintf(stderr, "Error! see manual, err code: %d\n", errno);
+        exit(errno);
+    }
+
     printf("All well, %d per male, %d per female", bonus.ticketPerMen, bonus.ticketPerFemale);
     return 0;
 }
