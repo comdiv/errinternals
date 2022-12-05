@@ -1,5 +1,7 @@
 #pragma once
 
+#include "hack.h"
+
 /// структура некоей промо программы по раздаче на мероприатии флаеров, билетов с рекламой
 typedef struct Bonus
 {
@@ -37,6 +39,8 @@ typedef struct Bonus
 // мужчины не наш профиль, на них много не закладываем
 #define FIXED_MEN_RATE 0.2
 #define BONUS_UNKNOWN -1
+#define ERR_ARIPH_ERR 2
 
 void init_Bonus(int ticketCount, Bonus* target);
-void calculate_Bonus(Bonus* target);
+// now returns error code
+Err calculate_Bonus(Bonus* target);

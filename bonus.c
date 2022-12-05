@@ -17,37 +17,55 @@ void init_Bonus(int ticketCount, Bonus *target)
 
 // private defs
 
-int __calculate_per_men(Bonus* target);
-int __calculate_per_female(Bonus* target);
-void __calculate_by_baseStrategy(Bonus *target);
+
+
+IntOrErr __calculate_per_men(Bonus* target);
+IntOrErr __calculate_per_female(Bonus* target);
+Err __calculate_by_baseStrategy(Bonus *target);
 
 // public impls
 
-void calculate_Bonus(Bonus* target) {
-
+Err calculate_Bonus(Bonus* target) {
+    Err result = NO_ERROR;
     // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
-
+    // ANSWER: shugar with conditional behavior and error accumulation
     /* many calls before ...*/
-    __calculate_by_baseStrategy(target);
+    result |= __calculate_by_baseStrategy(target);
     /* many calls after ...*/
+    return result;
 }
 
 
 // private impls
 
-void __calculate_by_baseStrategy(Bonus *target) {
+Err __calculate_by_baseStrategy(Bonus *target) {
     // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
-    target->ticketPerMen = __calculate_per_men(target);
-    target->ticketPerFemale = __calculate_per_female(target);
+    // ANSWER: shugar with conditional behavior and error accumulation
+    Err err = NO_ERROR;
+    APPLY_INT_OR_ERR(err, target->ticketPerMen,  __calculate_per_men(target));
+    APPLY_INT_OR_ERR(err, target->ticketPerFemale,  __calculate_per_female(target));
+    return err;
 }
 
-int __calculate_per_men(Bonus* target) {
+IntOrErr __calculate_per_men(Bonus* target) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
-    return target->menQuote / target->actualMenCount;
+    // ANSWER - functional-like style Either
+    return INT_OR_ERR(
+        target->actualMenCount!=0,
+        target->menQuote / target->actualMenCount,
+        BONUS_UNKNOWN, 
+        ERR_ARIPH_ERR
+    );
 }
 
-int __calculate_per_female(Bonus* target) {
+IntOrErr __calculate_per_female(Bonus* target) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
-    return target->femaleQuote / target->actualFemaleCount;
+    // ANSWER - functional-like style Either
+    return INT_OR_ERR(
+        target->actualFemaleCount!=0,
+        target->femaleQuote / target->actualFemaleCount,
+        BONUS_UNKNOWN, 
+        ERR_ARIPH_ERR
+    );
 }
 

@@ -1,8 +1,9 @@
-#include "hack.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <readline/readline.h>
 #include "bonus.h"
+#include "hack.h"
 
 int readInt(const char* prompt);
 
@@ -24,10 +25,16 @@ int main()
     bonus.actualMenCount = readInt("Enter actual men count: ");
     bonus.actualFemaleCount = readInt("Enter actual femail count: ");
     printf("Ok, perform compilation...\n");
-    calculate_Bonus(&bonus);
-
+     
     // PROBLEM (1): catch errors inside calculate bonus HERE
+    // ANSWER: API should return err we can ignore but can use
+    Err err = calculate_Bonus(&bonus);
+    if (err != NO_ERROR) {
+        printf("Error! Read manual. Error code: %d\n", err);
+        exit(err);
+    }
 
+    
     printf("All well, %d per male, %d per female", bonus.ticketPerMen, bonus.ticketPerFemale);
     return 0;
 }
