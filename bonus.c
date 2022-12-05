@@ -17,39 +17,53 @@ void init_Bonus(int ticketCount, Bonus *target)
 }
 
 // private defs
-int __calculate_per_men(Bonus* target);
-int __calculate_per_female(Bonus* target);
+
+int __calculate_per_men(Bonus *target);
+int __calculate_per_female(Bonus *target);
 void __calculate_by_baseStrategy(Bonus *target);
 
-// public impl
-void calculate_Bonus(Bonus* target) {
+// public impls
+
+void calculate_Bonus(Bonus *target)
+{
+
+    // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
+    // ANSWER: WE IGNORE IT TOTALLY AND GET INVALID RESULT, BUT WE KNOW THAT WE SOMEHOW SET ERRNO AND CALLER CAN CHECK IT
     /* many calls before ...*/
     __calculate_by_baseStrategy(target);
     /* many calls after ...*/
 }
 
+// private impls
 
-// private impl
-
-
-void __calculate_by_baseStrategy(Bonus *target) {
+void __calculate_by_baseStrategy(Bonus *target)
+{
+    // PROBLEM (3) WE DON'T WANT TO STEP BY STEP WORK WITH ERRORS ON ALL CALLS (WE ARE LAZY)
+    // ANSWER: WE IGNORE IT TOTALLY AND GET INVALID RESULT, BUT WE KNOW THAT WE SOMEHOW SET ERRNO AND CALLER CAN CHECK IT
     target->ticketPerMen = __calculate_per_men(target);
     target->ticketPerFemale = __calculate_per_female(target);
 }
 
-int __calculate_per_men(Bonus* target) {
-    if(target->actualFemaleCount == 0) {
+int __calculate_per_men(Bonus *target)
+{
+    // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
+    // ANSWER - WE SET GLOBAL ERROR FLAG AND RETURN SOME KNOWN INVALID VALUE
+    if (target->actualFemaleCount == 0)
+    {
         errno = ERR_ARITH_ERROR;
         return BONUS_UNKNOWN;
     }
     return target->menQuote / target->actualMenCount;
 }
 
-int __calculate_per_female(Bonus* target) {
-    if(target->actualFemaleCount == 0) {
+int __calculate_per_female(Bonus *target)
+{
+    // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
+    // ANSWER - WE SET GLOBAL ERROR FLAG AND RETURN SOME KNOWN INVALID VALUE
+    if (target->actualFemaleCount == 0)
+    {
         errno = ERR_ARITH_ERROR;
         return BONUS_UNKNOWN;
     }
     return target->femaleQuote / target->actualFemaleCount;
 }
-

@@ -27,10 +27,13 @@ int main()
     printf("Ok, perform compilation...\n");
     calculate_Bonus(&bonus);
 
+    // PROBLEM (1): catch errors inside calculate bonus HERE
+    // ANSWER : WE CHECK GLOBAL ERROR FLAG IN PLACE WHERE WE CAN DECIDE WHAT TO DO
     if (errno != 0) {
         fprintf(stderr, "Error! see manual, err code: %d\n", errno);
         exit(errno);
     }
+    
 
     printf("All well, %d per male, %d per female", bonus.ticketPerMen, bonus.ticketPerFemale);
     return 0;
