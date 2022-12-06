@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	clang -o errorint.exe ./*.c -lreadline
+	clang -g -Wall  -o errorint.exe ./*.c -lreadline
 
 run: build
 	./errorint.exe
