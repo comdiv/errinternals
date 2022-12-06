@@ -32,7 +32,7 @@ int main()
         calculate_Bonus(&bonus);
     CATCH(ERR_DIV_BY_ZERO)
         fprintf(stderr, "It was divide by zero error! Check your data!\n");
-        exit(ERROR_CODE); // panic
+        exit(ERROR_CODE); // panic  а могу не паниковать
     CATCH_ANY
         fprintf(stderr, "Unknown error with code: %d, check manual!\n", ERROR_CODE);
         exit(ERROR_CODE); // panic
