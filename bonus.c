@@ -1,4 +1,5 @@
 #include "bonus.h"
+#include "hack.h"
 
 void init_Bonus(int ticketCount, Bonus *target)
 {
@@ -45,10 +46,16 @@ void __calculate_by_baseStrategy(Bonus *target) {
 int __calculate_per_men(Bonus* target) {
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
     // тут конечно все равно придется как-то детектить проблемы и заменять ИСКЛЮЧЕНИЯМИ
+    if (target->actualMenCount == 0) {
+        THROW(ERR_DIV_BY_ZERO);
+    }
     return target->menQuote / target->actualMenCount;
 }
 
 int __calculate_per_female(Bonus* target) {
+    if (target->actualFemaleCount == 0) {
+        THROW(ERR_DIV_BY_ZERO);
+    }
     // PROBLEM (2) EXCEPTION IS OCCURED HERE, AT LOWEST LEVEL
     // тут конечно все равно придется как-то детектить проблемы и заменять ИСКЛЮЧЕНИЯМИ
     return target->femaleQuote / target->actualFemaleCount;

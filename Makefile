@@ -7,5 +7,5 @@ run: build
 
 expand:
 	mkdir -p build
-	clang -E -dD main.c > build/main.expanded.txt
-	clang -E -dD bonus.c > build/bonus.expanded.txt
+	clang -E -dD main.c > build/main.e.c
+	clang -E -dD bonus.c > build/bonus.e.c
